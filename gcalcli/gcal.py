@@ -1245,10 +1245,12 @@ class GoogleCalendarInterface:
         if not event_text:
             raise GcalcliError('event_text is required for a quickAdd')
 
-        if len(self.cals) != 1:
+        # mjuarezm: we do not raise exception if we have more than one
+        # calendar, just take the first one in the list.
+        #if len(self.cals) != 1:
             # TODO: get a better name for this exception class
             # and use it elsewhere
-            raise GcalcliError('You must only specify a single calendar\n')
+        #    raise GcalcliError('You must only specify a single calendar\n')
 
         new_event = self._retry_with_backoff(
             self.get_cal_service()
